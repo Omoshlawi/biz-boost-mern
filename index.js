@@ -1,8 +1,10 @@
 const express = require('express');
+const logging = require("./middlewares/logging")
 const Joi = require('joi');
 
 const app = express();
 app.use(express.json()) // enables midle where that  converts request body to json object
+app.use(logging)
 const business = [
     { id: 1, name: "Biz One" },
     { id: 2, name: "Biz two" },
