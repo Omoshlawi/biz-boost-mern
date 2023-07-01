@@ -1,0 +1,22 @@
+{
+  "name": "bizboostnode",
+  "version": "1.0.0",
+  "description": "Business boost ecomerce restfull nackend application based on express js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Omoshlawi/biz-boost-express.git"
+  },
+  "author": "Laurent Ouma",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Omoshlawi/biz-boost-express/issues"
+  },
+  "homepage": "https://github.com/Omoshlawi/biz-boost-express#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
