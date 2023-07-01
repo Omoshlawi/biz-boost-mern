@@ -1,4 +1,5 @@
 const express = require('express');
+const Joi = require('joi');
 
 const app = express();
 app.use(express.json()) // enables midle where that  converts request body to json object
@@ -16,17 +17,25 @@ app.get("/businesses/", (req, res) => {
 });
 app.get("/businesses/:id", (req, res) => {
     const bus = business.find((business) => req.params.id === String(business.id))
-    if (!bus) res.status(404).json({ code: 404, detail: "No such business found" })
+    if (!bus) return res.status(404).json({ code: 404, detail: "No such business found" })
     res.json(bus)
 });
 app.post("/businesses/", (req, res) => {
-    business.push({
-        id: business.length + 1,
-        ...req.body
+    const schema = Joi.object({
+        name: Joi.string()
+            .min(4)
+            .required(),
+        created: Joi.date().required()
     })
-    res.json(business)
+    const { error, value, warning } = schema.validate(req.body)
+    if (error) {
+        return res.status(400).json({ detail: error.details.map(detail => detail.message).join(';') })
+    }
+    res.send(value)
 });
 const PORT = process.env.PORT || 3000
+
+
 app.listen(PORT, () => {
     console.log(`Listening on port  ${PORT}....`);
 })
