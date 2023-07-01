@@ -1,23 +1,13 @@
-const express = require('express')
+const express = require("express");
 
-const router = express.Router()
+const router = express.Router();
 
-router.get("/", (req, res) => {
+router.get("/", (req, res) => {});
+router.post("/", (req, res) => {});
+router.get("/:id", (req, res) => {});
+router.put("/:id", (req, res) => {});
+router.delete("/:id", (req, res) => {});
 
-})
-router.post("/", (req, res) => {
+// router.use("/:id/branches", );
 
-})
-router.get("/:id", (req, res) => {
-
-})
-router.put("/:id", (req, res) => {
-
-})
-router.delete("/:id", (req, res) => {
-
-})
-
-
-
-module.exports = router
+module.exports = router;
