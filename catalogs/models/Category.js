@@ -100,5 +100,5 @@ const Category = mongoose.model(
 
 module.exports = {
   Category,
-  CtegoryMeta: mongoose.model("CategoryMeta", metaShema),
+  CategoryMeta: mongoose.model("CategoryMeta", metaShema),
 };

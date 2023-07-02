@@ -1,7 +1,7 @@
 const Joi = require("joi");
-const Category = require("./models/Category");
 const { default: slugify } = require("slugify");
 const { getValidationErrrJson } = require("../utils/helpers");
+const { Category, CategoryMeta } = require("./models/Category");
 const CategorySchema = Joi.object({
   category: Joi.string().required().min(5).max(50).label("Category"),
   description: Joi.string().min(20),
