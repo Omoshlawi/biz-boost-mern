@@ -1,17 +1,16 @@
 const mongoose = require("mongoose");
-
-const Branch = mongoose.model(
+module.exports = mongoose.model(
   "Branch",
   new mongoose.Schema({
     business: {
-      type: mongoose.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
     },
     street: String,
     city: String,
     country: String,
     address: {
-      type: mongoose.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
     },
     name: {
@@ -46,11 +45,12 @@ const Branch = mongoose.model(
       type: Boolean,
       default: false,
     },
-    
+
     image: String,
     customer_service_number: {
       type: String,
       required: true,
+      length: 10,
     },
   })
 );

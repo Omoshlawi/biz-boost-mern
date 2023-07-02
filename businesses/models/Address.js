@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const Address = mongoose.model(
+module.exports = mongoose.model(
   "Address",
   new mongoose.Schema({
     zip: {

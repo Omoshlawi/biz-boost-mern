@@ -4,8 +4,9 @@ const Product = mongoose.model(
   "Product",
   new mongoose.Schema({
     category: {
-      type: mongoose.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
+      ref: "Category",
     },
     name: {
       type: String,
@@ -20,17 +21,21 @@ const Product = mongoose.model(
       maxlength: 50,
     },
     branch: {
-      type: mongoose.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "Branch",
+    },
+    image: {
+      type: String,
       required: true,
     },
-    image: String,
     description: {
       type: String,
       minlength: 20,
       required: false,
     },
     price: {
-      type: mongoose.Types.Decimal128,
+      type: mongoose.Schema.Types.Decimal128,
       required: false,
       default: 0.0,
     },
@@ -44,6 +49,19 @@ const Product = mongoose.model(
       required: false,
       default: Date.now,
     },
-    availa
+    available: {
+      type: Boolean,
+      default: true,
+      required: false,
+    },
+    images: {
+      type: Array,
+      required: true,
+      validate: {
+        
+        validator: (value) => value && value.length > 0,
+        message: "Product must have atleast one image",
+      },
+    },
   })
 );

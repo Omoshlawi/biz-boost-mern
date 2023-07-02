@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Business = mongoose.model(
+module.exports = mongoose.model(
   "Business",
   new mongoose.Schema({
     name: {
@@ -35,15 +35,10 @@ const Business = mongoose.model(
       default: false,
     },
     image: String,
-    owner: mongoose.Types.ObjectId,
+    owner: mongoose.Schema.Types.ObjectId,
     address: {
-      type: mongoose.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
     },
   })
 );
-
-const getBusinesses = async () => {
-  const businesses = await Business.find();
-  return businesses;
-};
