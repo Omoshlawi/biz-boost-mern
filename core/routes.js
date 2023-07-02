@@ -2,6 +2,7 @@ const express = require("express");
 const Joi = require("joi");
 const status = require("./views/status");
 const tags = require("./views/tags");
+const templates = require("./views/templates");
 
 const router = express.Router();
 
@@ -19,10 +20,10 @@ router.post("/tags", tags.createView);
 router.get("/tags/:id", tags.detailedView);
 router.put("/tags/:id", tags.updateView);
 router.delete("/tags/:id", tags.deleteView);
-router.get("/templates", (req, res) => {});
-router.post("/templates", (req, res) => {});
-router.get("/templates/:id", (req, res) => {});
-router.put("/templates/:id", (req, res) => {});
-router.delete("/templates/:id", (req, res) => {});
+router.get("/templates", templates.listView);
+router.post("/templates", templates.createView);
+router.get("/templates/:id", templates.detailedView);
+router.put("/templates/:id", templates.updateView);
+router.delete("/templates/:id", templates.deleteView);
 
 module.exports = router;
