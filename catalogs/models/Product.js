@@ -1,5 +1,50 @@
 const { default: mongoose } = require("mongoose");
 
+const generalSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+    minlength: 5,
+    maxlength: 50,
+  },
+  description: {
+    type: String,
+    required: false,
+    minlength: 20,
+  },
+  slug: {
+    type: String,
+    required: true,
+    minlength: 5,
+    maxlength: 50,
+    lowercase: true,
+  },
+  branch: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: "Branch",
+  },
+});
+
+const pricingSchema = new mongoose.Schema({
+  basePrice: {
+    type: String,
+    required: true,
+    minlength: 5,
+    maxlength: 50,
+  },
+  dicount: {
+    type: String,
+    required: false,
+    minlength: 20,
+  },
+  netPrice: {
+    type: Number,
+    min: 0,
+    virtual: true,
+  },
+});
+
 const Product = mongoose.model(
   "Product",
   new mongoose.Schema({
@@ -8,36 +53,29 @@ const Product = mongoose.model(
       required: true,
       ref: "Category",
     },
-    name: {
+    thumbnail: {
       type: String,
       required: true,
-      minlength: 5,
-      maxlength: 50,
     },
-    slug: {
-      type: String,
+    general: {
+      type: generalSchema,
       required: true,
-      minlength: 5,
-      maxlength: 50,
     },
-    branch: {
+    pricing: {
+      type: pricingSchema,
+      required: true,
+    },
+    tags: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: "Tag",
+    },
+    status: {
       type: mongoose.Schema.Types.ObjectId,
-      required: true,
-      ref: "Branch",
+      ref: "Status",
     },
-    image: {
-      type: String,
-      required: true,
-    },
-    description: {
-      type: String,
-      minlength: 20,
-      required: false,
-    },
-    price: {
-      type: mongoose.Schema.Types.Decimal128,
-      required: false,
-      default: 0.0,
+    template: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Template",
     },
     created: {
       type: Date,
@@ -58,10 +96,15 @@ const Product = mongoose.model(
       type: Array,
       required: true,
       validate: {
-        
         validator: (value) => value && value.length > 0,
         message: "Product must have atleast one image",
       },
     },
   })
 );
+
+module.exports = {
+  Product,
+  Pricing: mongoose.model("Pricing", pricingSchema),
+  General: mongoose.model("General", generalSchema),
+};
